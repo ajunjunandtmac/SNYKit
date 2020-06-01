@@ -62,6 +62,13 @@ open class SNY {
         }
     }
     
+    public static func SetKingFisherMemoryCacheLimit() {
+        let totalMemory = ProcessInfo.processInfo.physicalMemory
+        let costLimit = totalMemory / 20
+        let costMemory = (costLimit > Int.max) ? Int.max : Int(costLimit)
+        ImageCache.default.memoryStorage.config.totalCostLimit = costMemory
+    }
+    
     // 加载Nib
     public static func loadNib(_ theClass: AnyClass) -> View? {
         let className = NSStringFromClass(theClass).components(separatedBy: ".").last!
